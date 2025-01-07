@@ -4,6 +4,7 @@
 #include <vector>
 #include "window/AppWindow.h"
 #include "objects/Rectangle.h"
+#include <glm/glm.hpp>
 
 bool initGlew() {
     // Initialize GLEW
@@ -17,7 +18,7 @@ bool initGlew() {
 }
 
 int main() {
-
+    
     AppWindow appWindow;
     if(!appWindow.Init()) {
         return -1;
@@ -30,6 +31,9 @@ int main() {
 
     Rectangle rectangle;
     rectangle.Setup();
+    
+    glm::vec4 rectangleColor(1.0f, 1.0f, 0.0f, 1.0f);
+    rectangle.SetColor(rectangleColor);
 
     // Render loop
     while (!appWindow.WindowShouldClose()) {

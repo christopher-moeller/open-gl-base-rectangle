@@ -10,26 +10,31 @@ project "OpenGLBaseRectangle"
     targetdir "bin/%{cfg.buildcfg}"
     objdir "bin-int/%{cfg.buildcfg}"
 
-    files { "src/**.h", "src/**.cpp" }
+    files { "src/**.h", "src/**.cpp", "src/**.glsl" }
 
-    includedirs { -- Path to GLFW and GLEW headers
+    includedirs { -- Path to GLFW, GLEW and GLM headers
         "vendor/GLFW/include",
-        "vendor/GLEW/include"
+        "vendor/GLEW/include",
+        "vendor/GLM/include"
     }
 
-    externalincludedirs { "vendor/GLFW/include", "vendor/GLEW/include" } -- This is needed for XCode
+    externalincludedirs { "vendor/GLFW/include", "vendor/GLEW/include", "vendor/GLM/include" } -- This is needed for XCode
 
     libdirs { -- Path to GLFW libraries
         "vendor/GLFW/lib",
-        "vendor/GLEW/lib"
+        "vendor/GLEW/lib",
+        "vendor/GLM/lib"
     }
 
     -- Link GLFW and macOS system frameworks
     links { 
         "GLEW",
+        "GLM",
         "GLFW",                      -- Link GLFW
         "OpenGL.framework"            -- OpenGL on macOS
     }
+
+    debugdir "." -- Set the working directory to the root of your project directory
     
     filter "configurations:Debug"
         defines { "DEBUG" }

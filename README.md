@@ -85,3 +85,23 @@ The `main.cpp` file contains a simple OpenGL application that:
 1. **Multiple Windows**: Ensure Xcode is not relaunching old processes. Disable "Debug: Attach to Process on Launch" in the Xcode scheme.
 2. **Library Not Found**: Ensure `libglfw3.a` and `libGLEW.a` are correctly placed in the `vendor` directory.
 3. **MetalTools Warning**: This warning can be safely ignored if the application functions correctly.
+
+
+# Setting the Working Directory in Xcode (Manual Method)
+
+If you encounter issues with file paths when running your application in Xcode, you can manually set the working directory in your Xcode scheme. Follow these steps:
+
+## Steps to Set the Working Directory
+
+1. Open your project in **Xcode**.
+2. Go to the menu bar and select **Product > Scheme > Edit Scheme**.
+3. In the left-hand sidebar of the scheme editor, select the **Run** option.
+4. Click on the **Options** tab at the top of the window.
+5. Check the box labeled **Use custom working directory**.
+6. Set the custom working directory to the root of your project (where your `premake5.lua` file is located). 
+   - You can do this by clicking the folder icon and navigating to the project root.
+7. Click **Close** to save the changes.
+
+## Notes
+- You will need to repeat this step if you regenerate the Xcode project with `premake5 xcode4`.
+- If you want to automate this process, consider using a custom script to modify the `.xcscheme` file after project generation.
