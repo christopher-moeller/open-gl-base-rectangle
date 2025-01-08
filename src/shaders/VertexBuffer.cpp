@@ -69,3 +69,7 @@ void VertexBuffer::AddAttributePointers(GLuint attributeSizePerVertex, GLuint ve
     VertexAttributePointer attributePointer(attributeSizePerVertex, vertextSize);
     this->attributePointers.push_back(attributePointer);
 }
+
+size_t VertexBuffer::GetIndicesCount() const {
+    return this->indices.size();
+}

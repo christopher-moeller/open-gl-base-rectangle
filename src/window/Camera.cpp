@@ -7,9 +7,9 @@ const unsigned int SCR_HEIGHT = 600;
 
 const float SPEED =  2.5f;
 
-Camera::Camera() : Position(glm::vec3(0.0f, 0.0f, -3.0f)),
-                    Front(glm::vec3(0.0f, 0.0f, 1.0f)),
-                    Up(glm::vec3(0.0f, -1.0f, 0.0f))
+Camera::Camera() : Position(glm::vec3(0.0f, 0.0f, 3.0f)),
+                    Front(glm::vec3(0.0f, 0.0f, -1.0f)),
+                    Up(glm::vec3(0.0f, 1.0f, 0.0f))
 {
     
 }

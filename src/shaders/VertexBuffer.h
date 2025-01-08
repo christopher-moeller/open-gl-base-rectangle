@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include <GL/glew.h>
 
@@ -30,4 +32,5 @@ public:
     void AddAttributePointers(GLuint attributeSizePerVertex, GLuint vertextSize);
     void apply();
     void bind();
+    size_t GetIndicesCount() const;
 };

@@ -4,6 +4,7 @@
 #include <vector>
 #include "window/AppWindow.h"
 #include "objects/Rectangle.h"
+#include "objects/Checkerboard.h"
 #include <glm/glm.hpp>
 #include "window/Camera.h"
 
@@ -32,8 +33,11 @@ int main() {
         return -1;
     }
 
-    Rectangle rectangle;
-    rectangle.Setup();
+    //Rectangle rectangle;
+    //rectangle.Setup();
+    
+    Checkerboard checkerboard;
+    checkerboard.Setup();
     
     float deltaTime = 0.0f;    // time between current frame and last frame
     float lastFrame = 0.0f;
@@ -51,13 +55,13 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
-        rectangle.Draw(&camera);
+        checkerboard.Draw(&camera);
         // Swap buffers and poll events
         appWindow.SwapBuffers();
         appWindow.PollEvents();
     }
     
-    rectangle.CleanUp();
+    checkerboard.CleanUp();
     appWindow.Close();
     return 0;
 }
