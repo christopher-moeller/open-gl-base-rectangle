@@ -2,7 +2,9 @@
 
 #include <GL/glew.h>
 #include "../shaders/Shader.h"
+#include "../window/Camera.h"
 #include <glm/glm.hpp>
+#include "../shaders/VertexBuffer.h"
 
 class Rectangle
 {
@@ -11,12 +13,11 @@ private:
     GLuint VBO;
     GLuint EBO;
     Shader* shader;
-    glm::vec4 color;
+    VertexBuffer vertexBuffer;
 public:
     Rectangle(/* args */);
     ~Rectangle();
     int Setup();
     int CleanUp();
-    void Draw();
-    void SetColor(glm::vec4 color);
+    void Draw(Camera* camera);
 };

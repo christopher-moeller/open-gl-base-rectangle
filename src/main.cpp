@@ -5,6 +5,7 @@
 #include "window/AppWindow.h"
 #include "objects/Rectangle.h"
 #include <glm/glm.hpp>
+#include "window/Camera.h"
 
 bool initGlew() {
     // Initialize GLEW
@@ -19,7 +20,9 @@ bool initGlew() {
 
 int main() {
     
-    AppWindow appWindow;
+    Camera camera;
+    AppWindow appWindow(&camera);
+    
     if(!appWindow.Init()) {
         return -1;
     }
@@ -32,16 +35,23 @@ int main() {
     Rectangle rectangle;
     rectangle.Setup();
     
-    glm::vec4 rectangleColor(1.0f, 1.0f, 0.0f, 1.0f);
-    rectangle.SetColor(rectangleColor);
+    float deltaTime = 0.0f;    // time between current frame and last frame
+    float lastFrame = 0.0f;
 
     // Render loop
     while (!appWindow.WindowShouldClose()) {
+        
+        float currentFrame = static_cast<float>(glfwGetTime());
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+        
+        appWindow.ProsessInput(deltaTime);
+        
         // Clear the screen
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
-        rectangle.Draw();
+        rectangle.Draw(&camera);
         // Swap buffers and poll events
         appWindow.SwapBuffers();
         appWindow.PollEvents();
