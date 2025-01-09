@@ -18,4 +18,5 @@ public:
     void PollEvents();
     void Close();
     void ProsessInput(float deltaTime);
+    void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
 };

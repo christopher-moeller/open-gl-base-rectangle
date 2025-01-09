@@ -16,8 +16,8 @@ int Checkerboard::Setup() {
     
     this->shader = new Shader("rectangle");
     
-    int countRows = 80;
-    int countColumns = 80;
+    int countRows = 20;
+    int countColumns = 20;
     
     std::vector<float> verticies;
     std::vector<unsigned int> indices;
@@ -99,7 +99,7 @@ void Checkerboard::Draw(Camera* camera) {
     this->shader->setUniform4Mat("projection", projection);
     
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::rotate(model, glm::degrees(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
     this->shader->setUniform4Mat("model", model);
     
     glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(this->vertexBuffer.GetIndicesCount()), GL_UNSIGNED_INT, 0);

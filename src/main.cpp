@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include "window/Camera.h"
 
+
 bool initGlew() {
     // Initialize GLEW
     glewExperimental = GL_TRUE;

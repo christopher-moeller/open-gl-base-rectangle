@@ -2,14 +2,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const float SPEED =  0.5f;
 
-const float SPEED =  2.5f;
-
-Camera::Camera() : Position(glm::vec3(0.0f, 0.0f, 3.0f)),
-                    Front(glm::vec3(0.0f, 0.0f, -1.0f)),
-                    Up(glm::vec3(0.0f, 1.0f, 0.0f))
+Camera::Camera() : Position(glm::vec3(0.0f, 0.05f, 0.0f)),
+                    Front(glm::vec3(0.0f, 0.05f, -1.0f)),
+                    Up(glm::vec3(0.0f, 0.1f, 0.0f)),
+WindowWidth(800), WindowHeigt(600)
 {
     
 }
@@ -19,21 +17,35 @@ Camera::~Camera() {
 }
 
 glm::mat4 Camera::GetViewMatrix() {
-    return glm::lookAt(Position, Position + Front, Up);
+    return glm::lookAt(Position, Front, Up);
 }
 
 glm::mat4 Camera::GetProjectionMatrix() {
     glm::mat4 projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(45.0f), (float) this->WindowWidth / (float) this->WindowHeigt, 0.1f, 100.0f);
     return projection;
 }
 
 void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime) {
     float velocity = SPEED * deltaTime;
     if (direction == FORWARD)
-        Position += Front * velocity;
+        Position += glm::vec3(0.0f, 0.0f, -1.0f) * velocity;
     if (direction == BACKWARD)
-        Position -= Front * velocity;
+        Position -= glm::vec3(0.0f, 0.0f, -1.0f) * velocity;
+    if(direction == LEFT) {
+        Position += glm::vec3(-1.0f, 0.0f, 0.0f) * velocity;
+        Front += glm::vec3(-1.0f, 0.0f, 0.0f) * velocity;
+    }
+    if(direction == RIGHT) {
+        Position -= glm::vec3(-1.0f, 0.0f, 0.0f) * velocity;
+        Front -= glm::vec3(-1.0f, 0.0f, 0.0f) * velocity;
+    }
+    
+}
+
+void Camera::UpdateWindowSize(unsigned int width, unsigned int height) {
+    this->WindowWidth = width;
+    this->WindowHeigt = height;
 }
 
 

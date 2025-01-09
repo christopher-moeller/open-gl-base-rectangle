@@ -2,10 +2,14 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 
+
+Camera* cachedCamera;
+
 AppWindow::AppWindow(Camera* camera)
 {
     std::cout << "App Window called" << std::endl;
     this->camera = camera;
+    cachedCamera = camera;
 }
 
 AppWindow::~AppWindow()
@@ -14,6 +18,9 @@ AppWindow::~AppWindow()
 
 // Callback to adjust viewport when the window is resized
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    if(cachedCamera) {
+        cachedCamera->UpdateWindowSize(width, height);
+    }
     glViewport(0, 0, width, height);
 }
 
@@ -29,6 +36,14 @@ void AppWindow::ProsessInput(float deltaTime) {
     
     if(glfwGetKey(this->glfwWindow, GLFW_KEY_DOWN) == GLFW_PRESS) {
         this->camera->ProcessKeyboard(BACKWARD, deltaTime);
+    }
+    
+    if(glfwGetKey(this->glfwWindow, GLFW_KEY_LEFT) == GLFW_PRESS) {
+        this->camera->ProcessKeyboard(LEFT, deltaTime);
+    }
+    
+    if(glfwGetKey(this->glfwWindow, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+        this->camera->ProcessKeyboard(RIGHT, deltaTime);
     }
     
 }
